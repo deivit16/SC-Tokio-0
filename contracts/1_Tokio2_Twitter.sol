@@ -5,8 +5,6 @@ pragma solidity >=0.8.2 <0.9.0;
  * @title TwitterTokio
  * @dev Store & get tweets using struct
  */
-
-
 contract DecentralizedMessaging {
     struct TweetMessage {
         address sender;

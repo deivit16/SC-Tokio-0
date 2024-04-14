@@ -6,7 +6,6 @@ pragma solidity >=0.8.2 <0.9.0;
  * @title TwitterTokio
  * @dev Store & get tweets using struct
  */
-
 contract TwitterTokio {
     struct Tweet {
         string username;
