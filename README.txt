@@ -1,28 +1,35 @@
-REMIX DEFAULT WORKSPACE
+# TwitterTokio Smart Contract
 
-Remix default workspace is present when:
-i. Remix loads for the very first time 
-ii. A new workspace is created with 'Default' template
-iii. There are no files existing in the File Explorer
+## Description
+TwitterTokio is a smart contract that allows storing and retrieving tweets on the blockchain using a tweet data structure. Users can publish new tweets and retrieve previous tweets using functions provided by the contract.
 
-This workspace contains 3 directories:
+## Features
+- Publish new tweets with a 300-character limit.
+- Retrieve previous tweets using a start index.
+- Maintain a record of the last tweet read by each user.
 
-1. 'contracts': Holds three contracts with increasing levels of complexity.
-2. 'scripts': Contains four typescript files to deploy a contract. It is explained below.
-3. 'tests': Contains one Solidity test file for 'Ballot' contract & one JS test file for 'Storage' contract.
+## Contract Structure
+The contract consists of the following main parts:
+- **Tweet Struct**: Defines the structure of a tweet, which includes the username, tweet content, and timestamp.
+- **Tweet Mapping**: Associates each tweet with a unique identifier.
+- **Last Read Message Index Mapping**: Maintains a record of the last tweet read by each user.
+- **Events**: Emits an event when a new tweet is published.
+- **Public Functions**:
+  - `setTweet`: Allows users to publish new tweets.
+  - `getTweet`: Allows users to retrieve previous tweets starting from a given index.
+  - `getLastUnreadMessage`: Allows users to get the index of the last unread tweet.
 
-SCRIPTS
+## Usage
+To interact with the contract:
+1. Deploy the contract on a compatible blockchain.
+2. Use the provided functions to publish new tweets or retrieve previous tweets as needed.
 
-The 'scripts' folder has four typescript files which help to deploy the 'Storage' contract using 'web3.js' and 'ethers.js' libraries.
+## Notes
+- Ensure that the length of the tweet content does not exceed 300 characters when calling the `setTweet` function.
+- Ensure that the start index in the `getTweet` function is within the range of available tweets.
+- Note that the start index in the `getTweet` function should be less than or equal to the total number of tweets stored in the contract.
 
-For the deployment of any other contract, just update the contract's name from 'Storage' to the desired contract and provide constructor arguments accordingly 
-in the file `deploy_with_ethers.ts` or  `deploy_with_web3.ts`
+## Author
+This contract was created by DMR - TOKIO SCHOOL Spain.
 
-In the 'tests' folder there is a script containing Mocha-Chai unit tests for 'Storage' contract.
 
-To run a script, right click on file name in the file explorer and click 'Run'. Remember, Solidity file must already be compiled.
-Output from script will appear in remix terminal.
-
-Please note, require/import is supported in a limited manner for Remix supported modules.
-For now, modules supported by Remix are ethers, web3, swarmgw, chai, multihashes, remix and hardhat only for hardhat.ethers object/plugin.
-For unsupported modules, an error like this will be thrown: '<module_name> module require is not supported by Remix IDE' will be shown.

@@ -33,14 +33,14 @@
 						"type": "uint256"
 					}
 				],
-				"name": "TweetPublicado",
+				"name": "TweetPublished",
 				"type": "event"
 			},
 			{
 				"inputs": [
 					{
 						"internalType": "uint256",
-						"name": "_desdeIndice",
+						"name": "_startIndex",
 						"type": "uint256"
 					}
 				],
@@ -73,23 +73,10 @@
 				"type": "function"
 			},
 			{
-				"inputs": [],
-				"name": "obtenerUltimoMensajeLeido",
-				"outputs": [
-					{
-						"internalType": "uint256",
-						"name": "",
-						"type": "uint256"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
 				"inputs": [
 					{
 						"internalType": "string",
-						"name": "_content",
+						"name": "_tweetContent",
 						"type": "string"
 					},
 					{
@@ -117,60 +104,41 @@
 				"type": "function"
 			},
 			{
-				"inputs": [
-					{
-						"internalType": "uint256",
-						"name": "",
-						"type": "uint256"
-					}
-				],
-				"name": "tweets",
+				"inputs": [],
+				"name": "unreadMessages",
 				"outputs": [
 					{
-						"internalType": "string",
-						"name": "username",
-						"type": "string"
-					},
-					{
-						"internalType": "string",
-						"name": "tweet",
-						"type": "string"
-					},
-					{
-						"internalType": "uint256",
-						"name": "timestamp",
-						"type": "uint256"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "address",
+						"components": [
+							{
+								"internalType": "string",
+								"name": "username",
+								"type": "string"
+							},
+							{
+								"internalType": "string",
+								"name": "tweet",
+								"type": "string"
+							},
+							{
+								"internalType": "uint256",
+								"name": "timestamp",
+								"type": "uint256"
+							}
+						],
+						"internalType": "struct TwitterTokio.Tweet[]",
 						"name": "",
-						"type": "address"
+						"type": "tuple[]"
 					}
 				],
-				"name": "ultimoMensajeLeido",
-				"outputs": [
-					{
-						"internalType": "uint256",
-						"name": "",
-						"type": "uint256"
-					}
-				],
-				"stateMutability": "view",
+				"stateMutability": "nonpayable",
 				"type": "function"
 			}
 		],
 		"devdoc": {
-			"custom:dev-run-script": "./scripts/deploy_with_ethers.ts",
-			"details": "Store & retrieve value in a variable",
+			"details": "Store & get tweets using struct",
 			"kind": "dev",
 			"methods": {},
-			"title": "Twitter",
+			"title": "TwitterTokio",
 			"version": 1
 		},
 		"userdoc": {
@@ -196,11 +164,11 @@
 	},
 	"sources": {
 		"contracts/1_Tokio1_Twitter.sol": {
-			"keccak256": "0xa8bcf5addaaeb59485543e4f2124ed4747a3d686323830c3780f449cc86c67e0",
+			"keccak256": "0x85c8acb530af29dd4f3a681aaabb88a67532ce46eeebdaf59e36d2126e512e07",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://984ab20419f21ecfa2df36309f5d7415ec23da0cd18ca0fc65eed6abcedc44f6",
-				"dweb:/ipfs/QmPtujitpxTqZQmcb24z7cCUawenrxRvB5MznGmvgg2Qv5"
+				"bzz-raw://2f01fdca2e3fef4f2ca1c1a09bc23ece8b27561711365b7971e885307e72ad39",
+				"dweb:/ipfs/QmdNWz95j5DiDhkeyHrw87dJARSQkX7yV5nASZgim2r3zD"
 			]
 		}
 	},
