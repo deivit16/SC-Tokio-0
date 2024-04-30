@@ -1,0 +1,54 @@
+# Ignorar directorios generados
+/build/
+/node_modules/
+# /client/
+
+# Ignorar carpetas y archivos en el directorio raíz del proyecto
+.deps
+.state
+go
+go.mod
+go.sum
+package-lock.json
+
+# Ignorar archivos específicos en la carpeta client
+client/node_modules
+client/package-lock.json
+client/.pnp
+.pnp.js
+
+# Ignorar archivos específicos en la carpeta contracts
+contracts/artifacts
+
+# Ignorar archivos específicos en la carpeta migrations
+migrations/.gitkeep
+
+# Ignorar archivos específicos en el directorio raíz del proyecto
+.vscode  # Si estás utilizando Visual Studio Code
+.idea    # Si estás utilizando IntelliJ IDEA
+
+# testing
+/coverage
+
+# Ignorar archivos compilados
+*.bin
+
+# Ignorar archivos específicos
+.env
+
+# Ignorar archivos de dependencias específicos de Go
+/vendor/
+
+# Ignorar archivos de dependencias específicos de Solidity
+/.deps/
+
+# misc
+.DS_Store
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
