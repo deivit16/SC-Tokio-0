@@ -12459,12 +12459,12 @@
     "5777": {
       "events": {},
       "links": {},
-      "address": "0xA23aaEFDfeC07065399959c688CA768E2A0D25dc",
-      "transactionHash": "0x27d4dffc6f857b4bfd5c15665db5238cebe61f9c31ca1119288d366a061d5e57"
+      "address": "0xE57ea91887a93459750BA07F99a8221Bba076eb5",
+      "transactionHash": "0x6f9a2edb6603323c74269ec7fda78234d6c996378fe4d6dc8567d8fe82de6514"
     }
   },
   "schemaVersion": "3.4.16",
-  "updatedAt": "2024-04-30T15:21:06.171Z",
+  "updatedAt": "2024-05-01T08:15:25.496Z",
   "networkType": "ethereum",
   "devdoc": {
     "details": "Store & get tweets using struct",
