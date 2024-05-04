@@ -6,13 +6,13 @@ import './App.css';
 
 function App() {
   const [state,setState]=useState({ web3:null, contract:null });
-  const [data, setData]=useState([]);
-  const [totalTweets, setTotalTweets] = useState(0);
-
   const [newTweet, setNewTweet] = useState(""); // Define newTweet
   const handleTweetChange = (event) => { // Define handleTweetChange
     setNewTweet(event.target.value);
   };
+
+  const [data, setData]=useState([]);
+  const [totalTweets, setTotalTweets] = useState(0);
 
   useEffect(()=>{
     async function connectWeb3(){
@@ -37,47 +37,60 @@ function App() {
     connectWeb3();
   }, []);
 
-  useEffect(() => {
-    
-    async function readData(){
-      const { contract } = state;
-      if(contract) {
-        const tweet = await contract.methods
-          .getTweet(0)
-          .call();
-        setData([tweet]);
-      }
+  async function readData() {
+    const { contract } = state;
+    if (contract) {
+      const tweetsArray = await contract.methods.getTweet(0).call();
+
+      const tweets = [];
+      tweetsArray.forEach(tweet => {
+        const timestampInSeconds = parseInt(tweet.timestamp); // Convertir el timestamp a segundos
+        const timestampInMilliseconds = timestampInSeconds * 1000; // Convertir segundos a milisegundos
+        const date = new Date(timestampInMilliseconds); // Crear un objeto Date con el timestamp en milisegundos
+        const formattedDate = date.toLocaleDateString('es-ES', { day: '2-digit', month: '2-digit', year: 'numeric' }); // Formatear la fecha como dd/MM/yyyy
+        const tweetContent = tweet.tweet;
+        const username = tweet.username;
+        tweets.push({
+          tweet: tweetContent,
+          username: username,
+          timestamp: formattedDate
+        });
+      });
+      setData(tweets);
+      console.log(tweets);
     }
-    readData();
-  },[state]);
+  }
+
+  async function fetchTotalTweets() {
+    const { contract } = state;
+    if (contract) {
+      const total = await contract.methods
+        .totalTweets()
+        .call();
+      setTotalTweets(parseInt(total));
+    }
+  }
 
   useEffect(() => {
-    async function fetchTotalTweets() {
-      const { contract } = state;
-      if (contract) {
-        const total = await contract.methods
-          .totalTweets()
-          .call();
-        setTotalTweets(total);
-      }
-    }
+    readData();
     fetchTotalTweets();
   }, [state]);
 
   async function writeData(){
+    console.log("Entra WriteData");
     const { contract, account } = state;
     const userName = "@TokioSchool_Eth";
-
-    // const time = Math.floor(Date.now() / 1000);
-    // const data = document.querySelector("#value").value;
+  
     await contract.methods
-      .setTweet(userName, newTweet)
+      .setTweet(newTweet, userName)
       .send({from: account, gas: '1000000' });
-    setData([...data, {tweet: newTweet, username: userName}]);
-    setNewTweet("")
-    //window.location.reload();
+  
+    const newTweetObject = {tweet: newTweet, username: userName};
+    setData([...data, newTweetObject]);
+    setNewTweet("");
+    fetchTotalTweets();
   }
-
+ 
   return (
   <div className="App">
     <div className="header">
@@ -86,27 +99,25 @@ function App() {
     </div>
     <div className="content">
       <div className="">
-        {/* <input type="text" id="value"></input>
-        <button onClick={writeData}>Send Tweet</button> */}
         <textarea
           className="tweet-input"
           placeholder="Escribe tu tweet aquí..."
           value={newTweet}
           onChange={handleTweetChange}
         ></textarea>
-        <button className="tweet-button" onClick={writeData}>Enviar Tweet</button>
+        <button className="tweet-button" onClick={writeData}>Send Tweet</button>
       </div>
       <div className="tweet">
         {data.map((tweet, index) => (
-          <div key={index} className="tweet">
-            <p className="author">{tweet.tweet}</p>
-            <p>{tweet.username}</p>
+          <div key={index} className="tweet-item">
+            <p className="author"></p>&gt;{tweet.tweet}
+            <p className="tweet-content"></p>{tweet.timestamp}
+
+            <p className="tweet-content">{tweet.username}</p>
           </div>
         ))}
       </div>
     </div>
   </div>);
 }
-
-
 export default App;
